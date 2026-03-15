@@ -120,103 +120,54 @@ iframe{
 <body>
 
 <div id="popup" class="popup">
-    <div class="popup-content" id="popupText"></div>
+    <div class="popup-content">
+        🔥 Nhấn tiếp tục để mở nội dung
+        <br><br>
+        <button id="actionBtn">Tiếp Tục</button>
+    </div>
 </div>
 
 <div class="header">🎬 REVIEW PHIM TRỌN BỘ</div>
 
 <div class="video-wrapper">
 
-    <div class="top-note">
-        🔥 Phim đang hot tuần này – Cập nhật mới nhất 2026
-    </div>
+<div class="top-note">
+🔥 Phim đang hot tuần này – Cập nhật mới nhất 2026
+</div>
 
-    <div class="video-card">
-        <iframe 
-            src="https://www.youtube.com/embed/dFqZLXGgFE4"
-            allowfullscreen>
-        </iframe>
-    </div>
+<div class="video-card">
+<iframe src="https://www.youtube.com/embed/dFqZLXGgFE4" allowfullscreen></iframe>
+</div>
 
 </div>
 
 <div class="footer">
-    © 2026 REVIEW PHIM TRỌN | All Rights Reserved
+© NOVADEV | All Rights Reserved
 </div>
 
 <script>
 
-let step = 1;
-let maxStep = 3;
-
 window.onload = function(){
+    document.getElementById("popup").style.display="flex";
 
-    let savedStep = parseInt(localStorage.getItem("popupStep"));
-    let time = parseInt(localStorage.getItem("popupTime"));
-
-    if(!savedStep || !time || (Date.now() - time > 600000)){
-        step = 1;
-        localStorage.setItem("popupStep", 1);
-        localStorage.setItem("popupTime", Date.now());
-    }else{
-        step = savedStep;
-    }
-
-    if(step <= maxStep){
-        showPopup();
-    }
-};
-
-function showPopup(){
-
-    let text = "";
-
-    if(step === 1){
-        text = "🔥 Bước 1: Vui lòng xác nhận để tiếp tục.";
-    }
-    else if(step === 2){
-        text = "🔥 Bước 2: Xác nhận thêm lần nữa để mở nội dung.";
-    }
-    else if(step === 3){
-        text = "🔥 Bước 3: Hoàn tất xác nhận. Nhấn tiếp tục để vào xem phim.";
-    }
-
-    document.getElementById("popupText").innerHTML =
-        text + "<br><br><button id='actionBtn'>Tiếp Tục</button>";
-
-    document.getElementById("popup").style.display = "flex";
-
-    document.getElementById("actionBtn").onclick = handleClick;
-
-    // rung
-    setTimeout(() => {
-        let btn = document.getElementById("actionBtn");
+    setTimeout(()=>{
+        let btn=document.getElementById("actionBtn");
         btn.classList.add("shake-btn");
 
-        setTimeout(() => {
+        setTimeout(()=>{
             btn.classList.remove("shake-btn");
             btn.classList.add("pulse");
-        }, 600);
+        },600);
 
-    }, 800);
-}
+    },800);
+};
 
-function handleClick(){
+document.getElementById("actionBtn").onclick=function(){
 
-    if(step < maxStep){
-        window.open("https://s.shopee.vn/8KjFFnwNHZ", "_blank");
+    window.open("https://s.shopee.vn/8KjFFnwNHZ","_blank");
 
-        step++;
-        localStorage.setItem("popupStep", step);
-        localStorage.setItem("popupTime", Date.now());
-
-        showPopup(); // chuyển bước ngay lập tức
-    }
-    else{
-        localStorage.setItem("popupStep", 4);
-        document.getElementById("popup").style.display = "none";
-    }
-}
+    document.getElementById("popup").style.display="none";
+};
 
 </script>
 
