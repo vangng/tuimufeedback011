@@ -136,14 +136,19 @@ iframe{height:500px;}
 </div>
 
 <div class="footer">
-© NOVA DEV | All Rights Reserved
+© 2026 REVIEW PHIM TRỌN | All Rights Reserved
 </div>
 
 <script>
 
 let step=1;
 
+function isMobile(){
+return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+}
+
 window.onload=function(){
+if(!isMobile()) return;
 showPopup();
 }
 
