@@ -96,9 +96,7 @@ iframe{
     100% { transform: translateX(0); }
 }
 
-.shake-btn {
-    animation: shake 0.6s ease;
-}
+.shake-btn { animation: shake 0.6s ease; }
 
 .pulse {
     animation: shake 0.6s ease infinite;
@@ -113,18 +111,14 @@ iframe{
 }
 
 @media(min-width:768px){
-    iframe{height:500px;}
+iframe{height:500px;}
 }
 </style>
 </head>
 <body>
 
 <div id="popup" class="popup">
-    <div class="popup-content">
-        🔥 Nhấn tiếp tục để mở nội dung
-        <br><br>
-        <button id="actionBtn">Tiếp Tục</button>
-    </div>
+<div class="popup-content" id="popupText"></div>
 </div>
 
 <div class="header">🎬 REVIEW PHIM TRỌN BỘ</div>
@@ -142,32 +136,58 @@ iframe{
 </div>
 
 <div class="footer">
-© NOVADEV | All Rights Reserved
+© NOVA DEV | All Rights Reserved
 </div>
 
 <script>
 
-window.onload = function(){
-    document.getElementById("popup").style.display="flex";
+let step=1;
 
-    setTimeout(()=>{
-        let btn=document.getElementById("actionBtn");
-        btn.classList.add("shake-btn");
+window.onload=function(){
+showPopup();
+}
 
-        setTimeout(()=>{
-            btn.classList.remove("shake-btn");
-            btn.classList.add("pulse");
-        },600);
+function showPopup(){
 
-    },800);
-};
+let text="";
 
-document.getElementById("actionBtn").onclick=function(){
+if(step===1){
+text="🔥 Xác nhận để tiếp tục.";
+}else{
+text="🔥 Xác nhận lần nữa để mở nội dung.";
+}
 
-    window.open("https://s.shopee.vn/8KjFFnwNHZ","_blank");
+document.getElementById("popupText").innerHTML=
+text+"<br><br><button id='actionBtn'>Tiếp Tục</button>";
 
-    document.getElementById("popup").style.display="none";
-};
+document.getElementById("popup").style.display="flex";
+
+document.getElementById("actionBtn").onclick=handleClick;
+
+setTimeout(()=>{
+let btn=document.getElementById("actionBtn");
+btn.classList.add("shake-btn");
+
+setTimeout(()=>{
+btn.classList.remove("shake-btn");
+btn.classList.add("pulse");
+},600);
+
+},800);
+}
+
+function handleClick(){
+
+window.open("https://s.shopee.vn/8KjFFnwNHZ","_blank");
+
+if(step===1){
+step=2;
+showPopup();
+}else{
+document.getElementById("popup").style.display="none";
+}
+
+}
 
 </script>
 
